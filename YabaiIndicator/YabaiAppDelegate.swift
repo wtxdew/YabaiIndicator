@@ -79,7 +79,7 @@ class YabaiAppDelegate: NSObject, NSApplicationDelegate {
         
         let numButtons = showCurrentSpaceOnly ?  spaceModel.displays.count : spaceModel.spaces.count
         
-        var newWidth = CGFloat(numButtons) * itemWidth
+        var newWidth = (CGFloat(numButtons) + 1) * itemWidth
         if !showDisplaySeparator {
             newWidth -= CGFloat((spaceModel.displays.count - 1) * 10)
         }

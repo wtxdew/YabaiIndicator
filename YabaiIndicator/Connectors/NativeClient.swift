@@ -44,7 +44,21 @@ class NativeClient {
                     spaceIndex = spaceIncr
                 }
                 
-                spaces.append(Space(spaceid: spaceId, uuid: spaceUUID, visible: visible, active: active, display: dindex + 1, index: spaceIndex, yabaiIndex: totalSpaces, type: SpaceType(rawValue: spaceType) ?? SpaceType.standard))
+                let yabaiIndex = String(totalSpaces)
+                let r = gYabaiClient.yabaiSocketCall("-m", "query", "--spaces", "--space", yabaiIndex).response as? [String: Any]
+                let layout_type = r!["type"] as! String
+                var layout = -1
+                if layout_type == "bsp" {
+                    layout = 0
+                } else if layout_type == "float" {
+                    layout = 1
+                } else if layout_type == "stack" {
+                    layout = 2
+                } else{
+                    layout = -1
+                }
+                
+                spaces.append(Space(spaceid: spaceId, uuid: spaceUUID, visible: visible, active: active, display: dindex + 1, index: spaceIndex, yabaiIndex: totalSpaces, type: SpaceType(rawValue: spaceType) ?? SpaceType.standard, layout: LayoutType(rawValue: layout) ?? LayoutType.error))
             }
         }
         return spaces

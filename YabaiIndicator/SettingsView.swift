@@ -29,7 +29,7 @@ struct SettingsView : View {
                 }
             }.padding(10)
                 .tabItem {
-                    Label("General", systemImage: "gear")
+                    Label("Preferences", systemImage: "gear")
                 }
                 .tag(Tabs.general)
             

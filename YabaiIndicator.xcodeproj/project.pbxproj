@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03BC46F2287C994A003602CB /* Socket in Frameworks */ = {isa = PBXBuildFile; productRef = 03BC46F1287C994A003602CB /* Socket */; };
 		500F41362780826500C6BC9B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500F41352780826500C6BC9B /* SettingsView.swift */; };
 		5051A4692780C02700614C85 /* YabaiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5051A4682780C02700614C85 /* YabaiClient.swift */; };
 		5051A46B2780DC9B00614C85 /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5051A46A2780DC9B00614C85 /* defaults.plist */; };
@@ -23,7 +24,6 @@
 		506120A8277A1A8800E8F192 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506120A6277A1A8500E8F192 /* CoreServices.framework */; platformFilter = maccatalyst; };
 		506120AC277A1A9500E8F192 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506120AA277A1A9300E8F192 /* Cocoa.framework */; };
 		506120AF277A7BF800E8F192 /* SpacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506120AE277A7BF800E8F192 /* SpacesModel.swift */; };
-		506120B4277B44B200E8F192 /* Socket in Frameworks */ = {isa = PBXBuildFile; productRef = 506120B3277B44B200E8F192 /* Socket */; };
 		5086FE7F2782006D00E51F61 /* SocketClient.c in Sources */ = {isa = PBXBuildFile; fileRef = 5086FE7E2782006C00E51F61 /* SocketClient.c */; };
 		5086FE842783026C00E51F61 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5086FE832783026C00E51F61 /* ButtonStyle.swift */; };
 		5086FE87278303EE00E51F61 /* NativeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5086FE86278303EE00E51F61 /* NativeClient.swift */; };
@@ -86,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				506120B4277B44B200E8F192 /* Socket in Frameworks */,
+				03BC46F2287C994A003602CB /* Socket in Frameworks */,
 				506120AC277A1A9500E8F192 /* Cocoa.framework in Frameworks */,
 				506120A4277A1A6F00E8F192 /* CoreGraphics.framework in Frameworks */,
 				506120A8277A1A8800E8F192 /* CoreServices.framework in Frameworks */,
@@ -228,7 +228,7 @@
 			);
 			name = YabaiIndicator;
 			packageProductDependencies = (
-				506120B3277B44B200E8F192 /* Socket */,
+				03BC46F1287C994A003602CB /* Socket */,
 			);
 			productName = YabaiIndicator;
 			productReference = 506120682779212000E8F192 /* YabaiIndicator.app */;
@@ -278,7 +278,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					506120672779212000E8F192 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -304,7 +304,7 @@
 			);
 			mainGroup = 5061205F2779212000E8F192;
 			packageReferences = (
-				506120B2277B44B200E8F192 /* XCRemoteSwiftPackageReference "BlueSocket" */,
+				03BC46EE287C9928003602CB /* XCRemoteSwiftPackageReference "BlueSocket" */,
 			);
 			productRefGroup = 506120692779212000E8F192 /* Products */;
 			projectDirPath = "";
@@ -518,6 +518,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YabaiIndicator/YabaiIndicator.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -553,6 +554,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = YabaiIndicator/YabaiIndicator.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -694,20 +696,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		506120B2277B44B200E8F192 /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
+		03BC46EE287C9928003602CB /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kitura/BlueSocket.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		506120B3277B44B200E8F192 /* Socket */ = {
+		03BC46F1287C994A003602CB /* Socket */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 506120B2277B44B200E8F192 /* XCRemoteSwiftPackageReference "BlueSocket" */;
+			package = 03BC46EE287C9928003602CB /* XCRemoteSwiftPackageReference "BlueSocket" */;
 			productName = Socket;
 		};
 /* End XCSwiftPackageProductDependency section */

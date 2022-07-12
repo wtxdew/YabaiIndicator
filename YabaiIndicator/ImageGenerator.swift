@@ -127,3 +127,41 @@ func generateImage(active: Bool, visible: Bool, windows: [Window], display: Disp
     image.isTemplate = true
     return image
 }
+
+func generateImage(symbol: NSString, layout: Bool) -> NSImage {
+    let size = CGSize(width: 25, height: 16)
+    let cornerRadius:CGFloat = 3
+    
+    let canvas = NSRect(origin: CGPoint.zero, size: size)
+    
+    let image = NSImage(size: size)
+    let strokeColor = NSColor.black
+    
+    if symbol == "ERR" {
+        let imageFill = NSImage(size: size)
+        let imageStroke = NSImage(size: size)
+
+        imageFill.lockFocus()
+        strokeColor.setFill()
+        NSBezierPath(roundedRect: canvas, xRadius: cornerRadius, yRadius: cornerRadius).fill()
+        imageFill.unlockFocus()
+        imageStroke.lockFocus()
+        drawText(symbol: symbol, color: strokeColor, size: size)
+        imageStroke.unlockFocus()
+        
+        image.lockFocus()
+        imageFill.draw(in: canvas, from: NSZeroRect, operation: .sourceOut, fraction: 1.0)
+        imageStroke.draw(in: canvas, from: NSZeroRect, operation: .destinationOut, fraction: 1.0)
+        image.unlockFocus()
+    } else {
+        image.lockFocus()
+        strokeColor.setStroke()
+        let path = NSBezierPath(roundedRect: canvas.insetBy(dx: 0.5, dy: 0.5), xRadius: cornerRadius, yRadius: cornerRadius)
+        path.stroke()
+        drawText(symbol: symbol, color: strokeColor, size: size)
+        image.unlockFocus()
+    }
+    
+    image.isTemplate = true
+    return image
+}

@@ -7,13 +7,34 @@
 
 import SwiftUI
 
+
+struct LayoutButton : View {
+    var space: Space
+    func getText() -> String {
+        switch space.layout {
+        case .bsp:
+            return "[]="
+        case .float:
+            return "><>"
+        case .stack:
+            return "[M]"
+        case .error:
+            return "ERR"
+        }
+    }
+    var body: some View {
+        Image(nsImage: generateImage(symbol: getText() as NSString, layout: true))
+            .frame(width:24, height: 16)
+    }
+}
+
 struct SpaceButton : View {
     var space: Space
     
     func getText() -> String {
         switch space.type {
         case .standard:
-            return "\(space.index)"
+            return "\(space.yabaiIndex)"
         case .fullscreen:
             return "F"
         case .divider:
@@ -31,9 +52,9 @@ struct SpaceButton : View {
         if space.type == .divider {
             Divider().background(Color(.systemGray)).frame(height: 14)
         } else {
-            Image(nsImage: generateImage(symbol: getText() as NSString, active: space.active, visible: space.visible)).onTapGesture {
-                switchSpace()
-            }.frame(width:24, height: 16)
+            Image(nsImage: generateImage(symbol: getText() as NSString, active: space.active, visible: space.visible))
+                .onTapGesture { switchSpace() }
+                .frame(width:24, height: 16)
         }
     }
 }
@@ -77,7 +98,7 @@ struct ContentView: View {
         for space in spaceModel.spaces {
             if lastDisplay > 0 && space.display != lastDisplay {
                 if showDisplaySeparator {
-                    shownSpaces.append(Space(spaceid: 0, uuid: "", visible: true, active: false, display: 0, index: 0, yabaiIndex: 0, type: .divider))
+                    shownSpaces.append(Space(spaceid: 0, uuid: "", visible: true, active: false, display: 0, index: 0, yabaiIndex: 0, type: .divider, layout: .error))
                 }
             }
             if space.visible || !showCurrentSpaceOnly{
@@ -88,9 +109,21 @@ struct ContentView: View {
         return shownSpaces
     }
     
+    private func getActiveSpace() -> Space {
+        var activeSpace : Space = Space(spaceid: 0, uuid: "", visible: true, active: false, display: 0, index: 0, yabaiIndex: 0, type: .divider, layout: .error)
+        for space in spaceModel.spaces {
+            if space.active{
+                activeSpace = space
+                break
+            }
+        }
+        return activeSpace
+    }
+    
     var body: some View {
         HStack (spacing: 4) {
             if buttonStyle == .numeric || spaceModel.displays.count > 0 {
+                LayoutButton(space: getActiveSpace())
                 ForEach(generateSpaces(), id: \.self) {space in
                     switch buttonStyle {
                     case .numeric:
