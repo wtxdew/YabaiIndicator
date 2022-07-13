@@ -1,5 +1,6 @@
 
-Fork from [xiamaz/YabaiIndicator](https://github.com/xiamaz/YabaiIndicator)
+Fork from [xiamaz/YabaiIndicator](https://github.com/xiamaz/YabaiIndicator).
+
 Add a yabai layout type indicator before the space indicator.
 
 ### bsp (`[]=`)
