@@ -9,16 +9,16 @@ import SwiftUI
 
 
 struct LayoutButton : View {
-    var space: Space
+    var actspace: ActSpace
     func getText() -> String {
-        switch space.layout {
-        case .bsp:
+        let layout = actspace.type
+        if layout == "bsp" {
             return "[]="
-        case .float:
+        } else if layout == "float" {
             return "><>"
-        case .stack:
-            return "[M]"
-        case .error:
+        } else if layout == "stack"{
+            return "[\(actspace.windows.count)]"
+        } else {
             return "ERR"
         }
     }
@@ -98,7 +98,7 @@ struct ContentView: View {
         for space in spaceModel.spaces {
             if lastDisplay > 0 && space.display != lastDisplay {
                 if showDisplaySeparator {
-                    shownSpaces.append(Space(spaceid: 0, uuid: "", visible: true, active: false, display: 0, index: 0, yabaiIndex: 0, type: .divider, layout: .error))
+                    shownSpaces.append(Space(spaceid: 0, uuid: "", visible: true, active: false, display: 0, index: 0, yabaiIndex: 0, type: .divider))
                 }
             }
             if space.visible || !showCurrentSpaceOnly{
@@ -109,21 +109,22 @@ struct ContentView: View {
         return shownSpaces
     }
     
-    private func getActiveSpace() -> Space {
-        var activeSpace : Space = Space(spaceid: 0, uuid: "", visible: true, active: false, display: 0, index: 0, yabaiIndex: 0, type: .divider, layout: .error)
-        for space in spaceModel.spaces {
-            if space.active{
-                activeSpace = space
+    private func getActiveSpace() -> ActSpace {
+        var focusSpace : ActSpace = ActSpace(id: 0, uuid: "nil", index: 0, type: "nil", windows: [], active: false)
+        for actspace in spaceModel.actspace {
+            if actspace.active {
+                focusSpace = actspace
                 break
             }
         }
-        return activeSpace
+        return focusSpace
     }
     
     var body: some View {
         HStack (spacing: 4) {
             if buttonStyle == .numeric || spaceModel.displays.count > 0 {
-                LayoutButton(space: getActiveSpace())
+                let activeSpace = getActiveSpace()
+                LayoutButton(actspace: activeSpace)
                 ForEach(generateSpaces(), id: \.self) {space in
                     switch buttonStyle {
                     case .numeric:
@@ -136,3 +137,25 @@ struct ContentView: View {
         }.padding(2)
     }
 }
+//
+//struct LayoutView: View {
+//    @EnvironmentObject var spaceModel: SpaceModel
+//
+//    private func getActiveSpace() -> ActSpace {
+//        var focusSpace : ActSpace = ActSpace(id: 0, uuid: "nil", index: 0, type: "nil", windows: [], active: false)
+//        for actspace in spaceModel.actspace {
+//            if actspace.active {
+//                focusSpace = actspace
+//                break
+//            }
+//        }
+//        return focusSpace
+//    }
+//
+//    var body: some View {
+//        HStack (spacing: 4) {
+//            let activeSpace = getActiveSpace()
+//            LayoutButton(actspace: activeSpace)
+//        }.padding(2)
+//    }
+//}

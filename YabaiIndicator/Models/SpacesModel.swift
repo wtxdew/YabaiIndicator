@@ -11,6 +11,7 @@ class SpaceModel: ObservableObject {
     @Published var spaces:[Space] = []
     @Published var windows:[Window] = []
     @Published var displays:[Display] = []
+    @Published var actspace:[ActSpace] = []
 }
 
 struct Space: Hashable {
@@ -22,8 +23,6 @@ struct Space: Hashable {
     let index: Int // mission control index (for sanitys sake)
     let yabaiIndex: Int // continuous index (for addresssing)
     let type: SpaceType // 0 - normal space 4 - fullscreen space // -1 divider
-    let layout: LayoutType // 0 - bsp 1 - float 2 - stack
-    // var id: String { uuid }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(spaceid)
@@ -32,6 +31,15 @@ struct Space: Hashable {
         hasher.combine(display)
         hasher.combine(index)
     }
+}
+
+struct ActSpace: Identifiable {
+    let id: UInt64
+    let uuid: String
+    let index: Int
+    let type: String
+    let windows: [Int]
+    let active: Bool
 }
 
 struct Display: Identifiable {

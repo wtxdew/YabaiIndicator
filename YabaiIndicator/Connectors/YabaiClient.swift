@@ -58,6 +58,14 @@ class YabaiClient {
         }
         return []
     }
+    
+    func queryActSpaces() -> [ActSpace] {
+        if let r = yabaiSocketCall("-m", "query", "--spaces").response as? [[String: Any]] {
+            let actspaces = r.compactMap{ActSpace(id: $0["id"] as! UInt64, uuid: $0["uuid"] as! String, index: $0["index"] as! Int, type: $0["type"] as! String, windows: $0["windows"] as! [Int], active: $0["has-focus"] as! Bool)}
+            return actspaces
+        }
+        return []
+    }
 }
 
 let gYabaiClient = YabaiClient()

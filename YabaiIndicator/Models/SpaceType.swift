@@ -12,10 +12,3 @@ enum SpaceType: Int {
     case standard = 0
     case fullscreen = 4
 }
-
-enum LayoutType: Int {
-    case bsp = 0
-    case float = 1
-    case stack = 2
-    case error = -1
-}

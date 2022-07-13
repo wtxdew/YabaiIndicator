@@ -37,6 +37,11 @@ class YabaiAppDelegate: NSObject, NSApplicationDelegate {
     var receiverQueue = DispatchQueue(label: "yabai-indicator.socket.receiver")
 
     @objc
+    func onLayoutChanged(_ notification: Notification) {
+        onLayoutRefresh()
+    }
+    
+    @objc
     func onSpaceChanged(_ notification: Notification) {
         onSpaceRefresh()
     }
@@ -51,6 +56,14 @@ class YabaiAppDelegate: NSObject, NSApplicationDelegate {
         receiverQueue.async {
             self.onSpaceRefresh()
             self.onWindowRefresh()
+            self.onLayoutRefresh()
+        }
+    }
+    
+    func onLayoutRefresh() {
+        let actspace = gYabaiClient.queryActSpaces()
+        DispatchQueue.main.async {
+            self.spaceModel.actspace = actspace
         }
     }
     
@@ -103,6 +116,7 @@ class YabaiAppDelegate: NSObject, NSApplicationDelegate {
                     receiverQueue.async {
                         // NSLog("Refreshing on main thread")
                         self.onSpaceRefresh()
+                        self.onLayoutRefresh()
                     }
                 } else if msg == "refresh windows" {
                     receiverQueue.async {
