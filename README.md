@@ -7,7 +7,7 @@ Add a yabai layout type indicator before the space indicator.
 ![screenshot of layout type "bsp"](docs/bsp.png)
 ### float (`><>`)
 ![screenshot of layout type "float"](docs/float.png)
-### stack (`[M]`)
+### stack (`[#windows]`)
 ![screenshot of layout type "stack"](docs/stack.png)
 
 <div align="center">
