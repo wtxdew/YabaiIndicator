@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct LayoutButton : View {
+    @AppStorage("buttonStyle") private var buttonStyle = ButtonStyle.numeric
     var actspace: ActSpace
     func getText() -> String {
         let layout = actspace.type
@@ -22,8 +23,18 @@ struct LayoutButton : View {
             return "ERR"
         }
     }
+    
+    func changeButtonStyle() {
+        if buttonStyle == .numeric {
+            buttonStyle = .windows
+        } else {
+            buttonStyle = .numeric
+        }
+    }
+    
     var body: some View {
         Image(nsImage: generateImage(symbol: getText() as NSString, layout: true))
+            .onTapGesture { changeButtonStyle() }
             .frame(width:24, height: 16)
     }
 }
