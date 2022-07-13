@@ -1,2 +1,9 @@
 xcuserdata/
 .DS_Store
+
+YabaiIndicator/YabaiIndicator.app/Contents/Frameworks
+YabaiIndicator/YabaiIndicator.app/Contents/MacOS
+YabaiIndicator/YabaiIndicator.app/Contents/Resources
+YabaiIndicator/YabaiIndicator.app/Contents/_CodeSignature
+YabaiIndicator/YabaiIndicator.app/Contents/Info.plist
+YabaiIndicator/YabaiIndicator.app/Contents/PkgInfo

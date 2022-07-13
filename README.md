@@ -1,3 +1,14 @@
+
+Fork from [xiamaz/YabaiIndicator](https://github.com/xiamaz/YabaiIndicator)
+Add a yabai layout type indicator before the space indicator.
+
+### bsp (`[]=`)
+![screenshot of layout type "bsp"]("docs/bsp.png")
+### float (`><>`)
+![screenshot of layout type "float"]("docs/float.png")
+### stack (`[M]`)
+![screenshot of layout type "stack"]("docs/stack.png")
+
 <div align="center">
     <img src="docs/appicon.png" width="200" height="200">
     <h1>Yabai Indicator</h1>
