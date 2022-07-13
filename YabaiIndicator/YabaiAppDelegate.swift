@@ -122,6 +122,7 @@ class YabaiAppDelegate: NSObject, NSApplicationDelegate {
                     receiverQueue.async {
                         // NSLog("Refreshing on main thread")
                         self.onWindowRefresh()
+                        self.onLayoutRefresh()
                     }
                 }
             }
