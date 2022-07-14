@@ -41,11 +41,34 @@ struct LayoutButton : View {
 
 struct SpaceButton : View {
     var space: Space
+    var yabaispace: [ActSpace]
     
     func getText() -> String {
         switch space.type {
         case .standard:
-            return "\(space.yabaiIndex)"
+            let id = space.yabaiIndex
+            var label : String = "\(id)"
+            if yabaispace.indices.contains(0){
+                if yabaispace[0].windows.count > 0 { label += "º" }
+            }
+            return label
+        case .fullscreen:
+            return "F"
+        case .divider:
+            return ""
+        }
+    }
+    
+    func getText_icon() -> String {
+        let spaceIcon = ["0", "</>", "G", "3", "4", "5", "6", "7", "8", "9"]
+        switch space.type {
+        case .standard:
+            let id = space.yabaiIndex
+            var output: String = ""
+            if spaceIcon.indices.contains(id){
+                output = spaceIcon[id]
+            }
+            return "\(output)"
         case .fullscreen:
             return "F"
         case .divider:
@@ -139,7 +162,7 @@ struct ContentView: View {
                 ForEach(generateSpaces(), id: \.self) {space in
                     switch buttonStyle {
                     case .numeric:
-                        SpaceButton(space: space)
+                        SpaceButton(space: space, yabaispace: spaceModel.actspace.filter{$0.index == space.yabaiIndex})
                     case .windows:
                         WindowSpaceButton(space: space, windows: spaceModel.windows.filter{$0.spaceIndex == space.yabaiIndex}, displays: spaceModel.displays)
                     }
@@ -148,25 +171,3 @@ struct ContentView: View {
         }.padding(2)
     }
 }
-//
-//struct LayoutView: View {
-//    @EnvironmentObject var spaceModel: SpaceModel
-//
-//    private func getActiveSpace() -> ActSpace {
-//        var focusSpace : ActSpace = ActSpace(id: 0, uuid: "nil", index: 0, type: "nil", windows: [], active: false)
-//        for actspace in spaceModel.actspace {
-//            if actspace.active {
-//                focusSpace = actspace
-//                break
-//            }
-//        }
-//        return focusSpace
-//    }
-//
-//    var body: some View {
-//        HStack (spacing: 4) {
-//            let activeSpace = getActiveSpace()
-//            LayoutButton(actspace: activeSpace)
-//        }.padding(2)
-//    }
-//}
